@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        /*
         let rand1 = Int.random(in:1...45)
         numLabel1.text = "\(rand1)"
         
@@ -181,7 +181,53 @@ class ViewController: UIViewController {
         default:
             break
         }
+         */
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        let labels = [numLabel1!, numLabel2!, numLabel3!, numLabel4!, numLabel5!, numLabel6!, numLabel7!]
+        
+        var nums: [Int] = []
+        
+        while nums.count < labels.count {
+            let randomNum = Int.random(in: 1...45)
+            if !nums.contains(randomNum) {
+                nums.append(randomNum)
+            }
+        }
+        
+        let sortedNums = nums.sorted()
+        //nums.sorted(by: >) decending order
+        
+        for (index, label) in labels.enumerated() {
+            label.layer.cornerRadius = label.bounds.width / 2
+            label.clipsToBounds = true
+            
+            label.text = "\(sortedNums[index])" //String Interpolation "\()"
+        
+            switch sortedNums[index]{
+            case 1...10:
+                label.backgroundColor = UIColor.red
+                label.textColor = UIColor.white
+            case 11...20:
+                label.backgroundColor = UIColor.green
+                label.textColor = UIColor.black
+            case 21...30:
+                label.backgroundColor = UIColor.blue
+                label.textColor = UIColor.white
+            case 31...40:
+                label.backgroundColor = UIColor.yellow
+                label.textColor = UIColor.black
+            case 41...45:
+                label.backgroundColor = UIColor.green
+                label.textColor = UIColor.black
+            default:
+                break
+            }
+        }
+        /*
         numLabel1.layer.cornerRadius = numLabel1.bounds.width / 2
         numLabel1.clipsToBounds = true
         
@@ -202,8 +248,8 @@ class ViewController: UIViewController {
         
         numLabel7.layer.cornerRadius = numLabel7.bounds.width / 2
         numLabel7.clipsToBounds = true
+        */
     }
-
 
 }
 
